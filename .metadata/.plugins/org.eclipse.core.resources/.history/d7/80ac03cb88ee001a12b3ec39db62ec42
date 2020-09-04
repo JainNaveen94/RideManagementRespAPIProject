@@ -1,0 +1,48 @@
+package com.nagarro.dashboard;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
+import com.nagarro.dashboard.model.ResponseModel;
+import com.nagarro.dashboard.model.RideModel;
+
+
+@RestController
+@RequestMapping("/dashboard")
+public class DashboardController {
+	
+	@Value("{$app.rideServiceUrl}")
+	private String uri;
+	
+	@Autowired
+	private RestTemplate restTemplate;
+	
+	@PostMapping
+	public ResponseEntity<ResponseModel> rideBookRequest(@RequestBody RideModel rideDetails) {
+		try {
+			MultiValueMap<String, String> headers = new LinkedMultiValueMap<String, String>();
+			headers.add("HeaderName", "value");
+			headers.add("Content-Type", "application/json");
+			HttpEntity<RideModel> entity = new HttpEntity<RideModel>(rideDetails,headers);
+			ResponseEntity<ResponseModel> response = this.restTemplate.exchange(uri + "/ride/book", HttpMethod.POST, entity, ResponseModel.class);
+			ResponseModel resp = response.getBody();
+			return new ResponseEntity<ResponseModel>(resp,HttpStatus.OK);
+		} catch (Exception exception) {
+			throw new RuntimeException();
+		}
+		
+	}
+
+}

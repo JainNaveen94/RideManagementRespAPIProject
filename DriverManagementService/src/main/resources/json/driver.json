@@ -1,0 +1,37 @@
+[
+	{
+		"id": "driver-01011-01",
+		"name": "Vikas Dubey",
+		"rating": "5 star",
+		"carType": "Sedan",
+		"status": "FreeForRide"
+	},
+	{
+		"id": "driver-01011-02",
+		"name": "Rohit Mishra",
+		"rating": "3 star",
+		"carType": "Hatch",
+		"status": "FreeForRide"
+	},
+	{
+		"id": "driver-01011-03",
+		"name": "Deepak Gupta",
+		"rating": "4 star",
+		"carType": "SUV",
+		"status": "OngoingRide"
+	},
+	{
+		"id": "driver-01011-04",
+		"name": "Mukesh Joshi",
+		"rating": "5 star",
+		"carType": "Sedan",
+		"status": "FreeForRide"
+	},
+	{
+		"id": "driver-01011-05",
+		"name": "Nirav Modi",
+		"rating": "1 star",
+		"carType": "Hatch",
+		"status": "FreeForRide"
+	}
+]

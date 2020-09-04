@@ -1,0 +1,17 @@
+#--------------------------Basic Config---------------------------------#
+spring.application.name=ridemanagementservice
+server.port=7000
+
+#--------------------------Eureka Properties ----------------------------#
+eureka.client.service-url.defaultZone=${EUREKA_URI:http://localhost:8761/eureka}
+
+#-------------------to make not discoverable itself------------------#
+eureka.client.register-with-eureka=false
+eureka.client.fetch-registry=false
+
+eureka.instance.prefer-ip-address=true
+eureka.instance.instance-id=${spring.cloud.client.ip-address}:${server.port}
+eureka.instance.hostname=${spring.cloud.client.ip-address}
+
+#-----------------json parser--------------------#
+spring.jackson.serialization.fail-on-empty-beans=false

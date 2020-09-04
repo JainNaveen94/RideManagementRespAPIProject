@@ -1,0 +1,15 @@
+package com.nagarro.driver.service;
+
+import org.springframework.stereotype.Service;
+
+import com.nagarro.driver.model.DriverModel;
+
+@Service
+public class DriverManagementService implements DriverManagementServiceInt {
+	
+	public DriverModel getDriverDetailByID(String driverId) {
+		return new DriverModel("driver-" + System.currentTimeMillis(), "Naveen Jain", "5", "Seden");
+	}
+		
+
+}

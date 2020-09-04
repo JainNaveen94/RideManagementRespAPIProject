@@ -1,0 +1,10 @@
+package com.nagarro.ride.services;
+
+import com.nagarro.ride.model.ResponseModel;
+import com.nagarro.ride.model.RideModel;
+
+public interface RideService {
+
+	ResponseModel rideBookRequest(RideModel rideDetails);
+
+}

@@ -1,0 +1,5 @@
+package com.nagarro.dashboard;
+
+public class DashboardController {
+
+}

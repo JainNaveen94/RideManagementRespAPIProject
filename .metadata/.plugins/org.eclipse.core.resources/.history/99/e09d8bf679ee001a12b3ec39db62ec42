@@ -1,0 +1,5 @@
+package com.nagarro.ride.services;
+
+public class RideServiceImpl implements RideService {
+
+}

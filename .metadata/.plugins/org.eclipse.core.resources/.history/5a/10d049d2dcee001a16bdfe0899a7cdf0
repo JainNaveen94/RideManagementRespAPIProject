@@ -1,0 +1,9 @@
+package com.nagarro.driver.service;
+
+import com.nagarro.driver.model.DriverModel;
+
+public interface DriverManagementServiceInt {
+	
+	DriverModel getDriverDetailByID(String driverId);
+
+}

@@ -1,0 +1,26 @@
+package com.nagarro.driver;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.nagarro.driver.model.DriverModel;
+
+@RestController
+@RequestMapping("/driverservice")
+public class DriverManagementController {
+	
+	@GetMapping("/{driverID}")
+	public ResponseEntity<DriverModel> getDriverDetailByID(@PathVariable String driverID) {
+		DriverModel driver = new DriverModel("driver-" + System.currentTimeMillis(), "Naveen Jain", "5", "Seden");
+		if(driver != null) {
+			return new ResponseEntity<DriverModel>(driver, HttpStatus.OK);
+		} else {
+			throw new RuntimeException("Currently Driver Service is Down");
+		}
+	}
+
+}

@@ -1,0 +1,55 @@
+version: '3'
+services:
+    netflix-eureka-naming-server:
+        image: naveenjain94/netflix-eureka-naming-server:v1
+        container_name: netflix-eureka-naming-server
+        ports:
+            - "8761:8761"
+
+    netflix-zuul-api-gateway-server:
+        image: naveenjain94/netflix-zuul-api-gateway-server:v1
+        container_name: netflix-zuul-api-gateway-server
+        ports:
+            - "8765:8765"
+        depends_on:
+            - netflix-eureka-naming-server
+        environment:
+            EUREKA_URI: 'http://netflix-eureka-naming-server:8761/eureka/'
+
+    driverservice:
+        image: naveenjain94/driverservice:v1
+        container_name: driverservice
+        ports:
+            - "6000:6000"
+        depends_on:
+            - netflix-eureka-naming-server
+        environment:
+            EUREKA_URI: 'http://netflix-eureka-naming-server:8761/eureka/'
+
+    rideservice:
+        image: naveenjain94/rideservice:v1
+        container_name: employeeservice
+        ports:
+            - "7000:7000"
+        depends_on:
+            - driverservice
+            - netflix-eureka-naming-server
+        links:
+            - driverservice
+        environment:
+            DRIVER_URI: 'http://driverservice:6000/'
+            EUREKA_URI: 'http://netflix-eureka-naming-server:8761/eureka/'
+            
+    dashboardservice:
+        image: naveenjain94/dashboardservice:v1
+        container_name: dashboardservice
+        ports:
+            - "8000:8000"
+        depends_on:
+            - rideservice
+            - netflix-eureka-naming-server
+        links:
+            - rideservice
+        environment:
+            Ride_URI: 'http://rideservice:7000/'
+            EUREKA_URI: 'http://netflix-eureka-naming-server:8761/eureka/'

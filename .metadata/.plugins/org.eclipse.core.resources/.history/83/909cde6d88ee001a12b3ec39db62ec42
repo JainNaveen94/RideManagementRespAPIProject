@@ -1,0 +1,48 @@
+package com.nagarro.dashboard;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
+import com.nagarro.dashboard.model.ResponseModel;
+import com.nagarro.dashboard.model.RideModel;
+import com.nagarro.ride.model.DriverModel;
+
+
+@RestController
+@RequestMapping("/dashboard")
+public class DashboardController {
+	
+	@Value("{$app.rideServiceUrl}")
+	private String uri;
+	
+	@Autowired
+	private RestTemplate restTemplate;
+	
+	@PostMapping
+	public ResponseEntity<ResponseModel> rideBookRequest(@RequestBody RideModel rideDetails) {
+		ResponseModel model = this.rideService.rideBookRequest(rideDetails);
+		if(model != null) {
+			return new ResponseEntity<ResponseModel>(model, HttpStatus.OK);
+		} else {
+			throw new RuntimeException("Ride is not currently Booked");
+		}
+		
+		try {
+			ResponseEntity<ResponseModel> response = this.restTemplate.exchange(uri + "/driverservice/123", HttpMethod.GET, null, new ParameterizedTypeReference<DriverModel>() {
+			});
+		} catch (Exception exception) {
+			throw new RuntimeException();
+		}
+		
+	}
+
+}

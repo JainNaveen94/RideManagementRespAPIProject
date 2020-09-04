@@ -1,0 +1,16 @@
+#--------------------------Basic Config---------------------------------#
+spring.application.name=dashboardmanagementservice
+server.port=8000
+
+#--------------------------Eureka Properties ----------------------------#
+eureka.client.service-url.defaultZone=${EUREKA_URI:http://localhost:8761/eureka}
+
+eureka.instance.prefer-ip-address=true
+eureka.instance.instance-id=${spring.cloud.client.ip-address}:${server.port}
+eureka.instance.hostname=${spring.cloud.client.ip-address}
+
+#-----------------json parser--------------------#
+spring.jackson.serialization.fail-on-empty-beans=false
+
+#-----------------other services calls-----------------#
+app.rideServiceUrl=${RIDE_URI:http://localhost:7000}

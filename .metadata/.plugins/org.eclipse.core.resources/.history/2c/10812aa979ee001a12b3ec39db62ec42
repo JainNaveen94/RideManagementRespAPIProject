@@ -1,0 +1,5 @@
+package com.nagarro.ride.model;
+
+public class ResponseModel {
+
+}
